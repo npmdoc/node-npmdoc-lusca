@@ -1,0 +1,736 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+    >lusca (v1.4.1)</a>
+</h1>
+<h4>Application security for express.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.lusca">module lusca</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.lusca">
+            function <span class="apidocSignatureSpan"></span>lusca
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.csp">
+            function <span class="apidocSignatureSpan">lusca.</span>csp
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.csrf">
+            function <span class="apidocSignatureSpan">lusca.</span>csrf
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.hsts">
+            function <span class="apidocSignatureSpan">lusca.</span>hsts
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.nosniff">
+            function <span class="apidocSignatureSpan">lusca.</span>nosniff
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.p3p">
+            function <span class="apidocSignatureSpan">lusca.</span>p3p
+            <span class="apidocSignatureSpan">(value)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.xframe">
+            function <span class="apidocSignatureSpan">lusca.</span>xframe
+            <span class="apidocSignatureSpan">(value)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.xssProtection">
+            function <span class="apidocSignatureSpan">lusca.</span>xssProtection
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">lusca.</span>token</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.lusca.csp">module lusca.csp</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.csp.csp">
+            function <span class="apidocSignatureSpan">lusca.</span>csp
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.csp.createPolicyString">
+            function <span class="apidocSignatureSpan">lusca.csp.</span>createPolicyString
+            <span class="apidocSignatureSpan">(policy)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.lusca.token">module lusca.token</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lusca.token.create">
+            function <span class="apidocSignatureSpan">lusca.token.</span>create
+            <span class="apidocSignatureSpan">(req, secretKey)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.lusca" id="apidoc.module.lusca">module lusca</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.lusca" id="apidoc.element.lusca.lusca">
+        function <span class="apidocSignatureSpan"></span>lusca
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">lusca = function (options) {
+    var headers = [];
+
+    if (options) {
+        Object.keys(lusca).forEach(function (key) {
+            var config = options[key];
+
+            if (config) {
+                headers.push(lusca[key](config));
+            }
+        });
+    }
+
+    return function lusca(req, res, next) {
+        var chain = next;
+
+        headers.forEach(function (header) {
+            chain = (function (next) {
+                return function (err) {
+                    if (err) {
+                        next(err);
+                        return;
+                    }
+                    header(req, res, next);
+                };
+            }(chain));
+        });
+
+        chain();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.csp" id="apidoc.element.lusca.csp">
+        function <span class="apidocSignatureSpan">lusca.</span>csp
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">csp = function (options) {
+    var policyRules = options &#x26;&#x26; options.policy,
+        isReportOnly = options &#x26;&#x26; options.reportOnly,
+        reportUri = options &#x26;&#x26; options.reportUri,
+        value, name;
+
+    name = &#x27;Content-Security-Policy&#x27;;
+
+    if (isReportOnly) {
+        name += &#x27;-Report-Only&#x27;;
+    }
+
+    value = createPolicyString(policyRules);
+
+    if (reportUri) {
+        if (value !== &#x27;&#x27;) {
+            value += &#x27;; &#x27;;
+        }
+        value += &#x27;report-uri &#x27; + reportUri;
+    }
+
+    return function csp(req, res, next) {
+        res.header(name, value);
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}));
+```
+
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.<span class="apidocCodeKeywordSpan">csp</span>({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.csrf" id="apidoc.element.lusca.csrf">
+        function <span class="apidocSignatureSpan">lusca.</span>csrf
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">csrf = function (options) {
+    var impl, key, header, secret, cookie;
+
+    options = options || {};
+
+    if (options.angular) {
+        options.header = &#x27;X-XSRF-TOKEN&#x27;;
+        options.cookie = &#x27;XSRF-TOKEN&#x27;;
+    }
+
+    key = options.key || &#x27;_csrf&#x27;;
+    impl = options.impl || token;
+    header = options.header || &#x27;x-csrf-token&#x27;;
+    secret = options.secret || &#x27;_csrfSecret&#x27;;
+    cookie = options.cookie;
+
+    function getCsrf(req, secret) {
+        var _impl, validate, _token, _secret;
+
+        _impl = impl.create(req, secret);
+        validate = impl.validate || _impl.validate;
+        _token = _impl.token || _impl;
+        _secret = _impl.secret;
+
+        return {
+            validate: validate,
+            token: _token,
+            secret: _secret
+        };
+    }
+
+    function setToken(res, token) {
+        res.locals[key] = token;
+        if (cookie) {
+            res.cookie(cookie, token);
+        }
+    }
+
+
+    return function checkCsrf(req, res, next) {
+        var method, _token, errmsg;
+
+        var csrf = getCsrf(req, secret);
+        setToken(res, csrf.token);
+
+        req.csrfToken = function csrfToken() {
+            var newCsrf = getCsrf(req, secret);
+            if (csrf.secret &#x26;&#x26; newCsrf.secret &#x26;&#x26; csrf.secret === newCsrf.secret) {
+                return csrf.token;
+            }
+
+            csrf = newCsrf;
+            setToken(res, csrf.token);
+            return csrf.token;
+        };
+
+        // Move along for safe verbs
+        method = req.method;
+        if (method === &#x27;GET&#x27; || method === &#x27;HEAD&#x27; || method === &#x27;OPTIONS&#x27;) {
+            return next();
+        }
+
+        // Validate token
+        _token = (req.body &#x26;&#x26; req.body[key]) || req.headers[header.toLowerCase()];
+
+        if (csrf.validate(req, _token)) {
+            next();
+        } else {
+            res.statusCode = 403;
+            if (!_token) {
+                errmsg = &#x27;CSRF token missing&#x27;;
+            } else {
+                errmsg = &#x27;CSRF token mismatch&#x27;;
+            }
+            next(new Error(errmsg));
+        }
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    nosniff: true
+}));
+```
+
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.<span class="apidocCodeKeywordSpan">csrf</span>());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.hsts" id="apidoc.element.lusca.hsts">
+        function <span class="apidocSignatureSpan">lusca.</span>hsts
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">hsts = function (options) {
+    var value;
+
+    options = options || {};
+
+    value = (options.maxAge !== undefined) ? &#x27;max-age=&#x27; + options.maxAge : &#x27;&#x27;;
+    value += (value &#x26;&#x26; options.includeSubDomains) ? &#x27;; includeSubDomains&#x27; : &#x27;&#x27;;
+    value += (value &#x26;&#x26; options.preload) ? &#x27;; preload&#x27; : &#x27;&#x27;;
+
+    return function hsts(req, res, next) {
+        if (value) {
+            res.header(&#x27;Strict-Transport-Security&#x27;, value);
+        }
+
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.<span class="apidocCodeKeywordSpan">hsts</span>({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+
+__Please note that you must use [express-session](https://github.com/expressjs/session), [cookie-session](https://github.com/expressjs
+/cookie-session), their express 3.x alternatives, or other session object management in order to use lusca.__
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.nosniff" id="apidoc.element.lusca.nosniff">
+        function <span class="apidocSignatureSpan">lusca.</span>nosniff
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function nosniff() {
+    return function nosniff(req, res, next) {
+        res.header(&#x27;X-Content-Type-Options&#x27;, &#x27;nosniff&#x27;);
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+app.use(lusca.csrf());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.<span class="apidocCodeKeywordSpan">nosniff</span>());
+```
+
+__Please note that you must use [express-session](https://github.com/expressjs/session), [cookie-session](https://github.com/expressjs
+/cookie-session), their express 3.x alternatives, or other session object management in order to use lusca.__
+
+
+## API
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.p3p" id="apidoc.element.lusca.p3p">
+        function <span class="apidocSignatureSpan">lusca.</span>p3p
+        <span class="apidocSignatureSpan">(value)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">p3p = function (value) {
+    return function p3p(req, res, next) {
+        if (value) {
+            res.header(&#x27;P3P&#x27;, value);
+        }
+
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.<span class="apidocCodeKeywordSpan">p3p</span>(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+
+__Please note that you must use [express-session](https://github.com/expressjs/session), [cookie-session](https://github.com/expressjs
+/cookie-session), their express 3.x alternatives, or other session object management in order to use lusca.__
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.xframe" id="apidoc.element.lusca.xframe">
+        function <span class="apidocSignatureSpan">lusca.</span>xframe
+        <span class="apidocSignatureSpan">(value)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">xframe = function (value) {
+    return function xframe(req, res, next) {
+        res.header(&#x27;X-FRAME-OPTIONS&#x27;, value);
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.<span class="apidocCodeKeywordSpan">xframe</span>(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+
+__Please note that you must use [express-session](https://github.com/expressjs/session), [cookie-session](https://github.com/expressjs
+/cookie-session), their express 3.x alternatives, or other session object management in order to use lusca.__
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.xssProtection" id="apidoc.element.lusca.xssProtection">
+        function <span class="apidocSignatureSpan">lusca.</span>xssProtection
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function xssProtection(options) {
+    options = options || {};
+
+    // `enabled` should be either `1` or `0`
+    var enabled = (options.enabled !== undefined) ? +options.enabled : 1;
+    var mode = options.mode || &#x27;block&#x27;;
+
+    return function xssProtection(req, res, next) {
+        res.header(&#x27;X-XSS-Protection&#x27;, enabled + &#x27;; mode=&#x27; + mode);
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.csp({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.<span class="apidocCodeKeywordSpan">xssProtection</span>(true));
+app.use(lusca.nosniff());
+```
+
+__Please note that you must use [express-session](https://github.com/expressjs/session), [cookie-session](https://github.com/expressjs
+/cookie-session), their express 3.x alternatives, or other session object management in order to use lusca.__
+
+
+## API
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.lusca.csp" id="apidoc.module.lusca.csp">module lusca.csp</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.csp.csp" id="apidoc.element.lusca.csp.csp">
+        function <span class="apidocSignatureSpan">lusca.</span>csp
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">csp = function (options) {
+    var policyRules = options &#x26;&#x26; options.policy,
+        isReportOnly = options &#x26;&#x26; options.reportOnly,
+        reportUri = options &#x26;&#x26; options.reportUri,
+        value, name;
+
+    name = &#x27;Content-Security-Policy&#x27;;
+
+    if (isReportOnly) {
+        name += &#x27;-Report-Only&#x27;;
+    }
+
+    value = createPolicyString(policyRules);
+
+    if (reportUri) {
+        if (value !== &#x27;&#x27;) {
+            value += &#x27;; &#x27;;
+        }
+        value += &#x27;report-uri &#x27; + reportUri;
+    }
+
+    return function csp(req, res, next) {
+        res.header(name, value);
+        next();
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}));
+```
+
+Setting any value to `false` will disable it. Alternately, you can opt into methods one by one:
+
+```js
+app.use(lusca.csrf());
+app.use(lusca.<span class="apidocCodeKeywordSpan">csp</span>({ /* ... */}));
+app.use(lusca.xframe(&#x27;SAMEORIGIN&#x27;));
+app.use(lusca.p3p(&#x27;ABCDEF&#x27;));
+app.use(lusca.hsts({ maxAge: 31536000 }));
+app.use(lusca.xssProtection(true));
+app.use(lusca.nosniff());
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.csp.createPolicyString" id="apidoc.element.lusca.csp.createPolicyString">
+        function <span class="apidocSignatureSpan">lusca.csp.</span>createPolicyString
+        <span class="apidocSignatureSpan">(policy)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">createPolicyString = function (policy) {
+    var entries;
+
+    if (thing.isString(policy)) {
+        return policy;
+    }
+
+    if (thing.isArray(policy)) {
+        return policy.map(createPolicyString).join(&#x27;; &#x27;);
+    }
+
+    if (thing.isObject(policy)) {
+        entries = Object.keys(policy).map(function (directive) {
+            if (policy[directive] === 0 || policy[directive]) {
+                directive += &#x27; &#x27; + policy[directive];
+            }
+            return directive;
+        });
+
+        return createPolicyString(entries);
+    }
+
+    throw Error(&#x27;invalid csp policy - must be array, string, or plain object&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.lusca.token" id="apidoc.module.lusca.token">module lusca.token</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.lusca.token.create" id="apidoc.element.lusca.token.create">
+        function <span class="apidocSignatureSpan">lusca.token.</span>create
+        <span class="apidocSignatureSpan">(req, secretKey)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function create(req, secretKey) {
+
+    var session = req.session;
+    if (session === undefined) {
+        throw new Error(&#x27;lusca requires req.session to be available in order to maintain state&#x27;);
+    }
+    var secret = session[secretKey];
+    // Save the secret for validation
+    if (!secret) {
+        session[secretKey] = crypto.pseudoRandomBytes(LENGTH).toString(&#x27;base64&#x27;);
+        secret = session[secretKey];
+    }
+
+    return {
+        secret: secret,
+        token: tokenize(salt(LENGTH), secret),
+        validate: function validate(req, token) {
+            if (typeof token !== &#x27;string&#x27;) {
+                return false;
+
+            }
+            return token === tokenize(token.slice(0, LENGTH), req.session[secretKey]);
+        }
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    header = options.header || &#x27;x-csrf-token&#x27;;
+    secret = options.secret || &#x27;_csrfSecret&#x27;;
+    cookie = options.cookie;
+
+    function getCsrf(req, secret) {
+var _impl, validate, _token, _secret;
+
+_impl = impl.<span class="apidocCodeKeywordSpan">create</span>(req, secret);
+validate = impl.validate || _impl.validate;
+_token = _impl.token || _impl;
+_secret = _impl.secret;
+
+return {
+    validate: validate,
+    token: _token,
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
